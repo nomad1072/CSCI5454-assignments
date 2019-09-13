@@ -94,7 +94,7 @@ if os.path.exists('./Results.pickle'):
     for number in l:
         print('**************************************************************************************************')
         print('Results for vertex: ', number )
-        print('Results: ', len(new_graph.calculateDorLess(str(number), 50, [])))
+        print('Results: ', len(new_graph.calculateDorLess(str(number), 10, [])))
         print('**************************************************************************************************')
 
     f.close()
