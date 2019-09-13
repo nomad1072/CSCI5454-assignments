@@ -1,6 +1,9 @@
+# Github Repo - https://github.com/nomad1072/CSCI5454-assignments
+
 from collections import defaultdict
 import pickle
 import os
+import random
 
 class Graph:
 
@@ -46,17 +49,17 @@ class Graph:
     def calculateDorLess(self, v, depth, current_vertices, visited_vertices=[]):
         if depth == 0:
             return current_vertices
-        print('Adjacent Vertices of ', v, " are: ", self.adjacencyList[v])
+        # print('Adjacent Vertices of ', v, " are: ", self.adjacencyList[v])
         for u in self.adjacencyList[v]:
             current_vertices = []
             if u not in visited_vertices:
                 visited_vertices.append(u)
                 current_vertices.append(u)
                 returned_vertices = self.calculateDorLess(u, depth - 1, current_vertices, visited_vertices)
-                print('**************************************************************************************************')
-                print('U: ', u)
-                print('Returned Vertices: ', returned_vertices)
-                print('**************************************************************************************************')
+                # print('**************************************************************************************************')
+                # print('U: ', u)
+                # print('Returned Vertices: ', returned_vertices)
+                # print('**************************************************************************************************')
                 visited_vertices = self.prune(returned_vertices, visited_vertices)
 
         return (visited_vertices)
@@ -87,7 +90,13 @@ if os.path.exists('./Results.pickle'):
     print('Metrics: ', metrics)
 
     # print('Results: ', new_graph.calculateDorLess("0", 500, []))
-    print('Results: ', new_graph.alternateSolution("0", 2, []))
+    l = [random.randint(0,1000) for i in range(10)]
+    for number in l:
+        print('**************************************************************************************************')
+        print('Results for vertex: ', number )
+        print('Results: ', len(new_graph.calculateDorLess(str(number), 50, [])))
+        print('**************************************************************************************************')
+
     f.close()
 else:
     with open('./roadNet-TX.txt') as fp:
